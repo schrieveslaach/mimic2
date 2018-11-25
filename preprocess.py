@@ -2,7 +2,7 @@ import argparse
 import os
 from multiprocessing import cpu_count
 from tqdm import tqdm
-from datasets import amy, blizzard, ljspeech, kusal, mailabs
+from datasets import amy, blizzard, css10, ljspeech, kusal, mailabs
 from hparams import hparams, hparams_debug_string
 
 
@@ -29,6 +29,14 @@ def preprocess_amy(args):
   out_dir = os.path.join(args.base_dir, args.output)
   os.makedirs(out_dir, exist_ok=True)
   metadata = amy.build_from_path(in_dir, out_dir, args.num_workers, tqdm=tqdm)
+  write_metadata(metadata, out_dir)
+
+
+def preprocess_css10_de(args):
+  in_dir = os.path.join(args.base_dir, 'css10')
+  out_dir = os.path.join(args.base_dir, args.output)
+  os.makedirs(out_dir, exist_ok=True)
+  metadata = css10.build_from_path(in_dir, out_dir, args.num_workers, tqdm=tqdm)
   write_metadata(metadata, out_dir)
 
 
@@ -79,7 +87,7 @@ def main():
   parser.add_argument('--base_dir', default=os.path.expanduser('~/tacotron'))
   parser.add_argument('--output', default='training')
   parser.add_argument(
-      '--dataset', required=True, choices=['amy', 'blizzard', 'ljspeech', 'kusal', 'mailabs']
+      '--dataset', required=True, choices=['amy', 'blizzard', 'css10', 'ljspeech', 'kusal', 'mailabs']
   )
   parser.add_argument('--mailabs_books_dir',
                       help='absolute directory to the books for the mlailabs')
@@ -103,6 +111,8 @@ def main():
     preprocess_amy(args)
   elif args.dataset == 'blizzard':
     preprocess_blizzard(args)
+  elif args.dataset == 'css10':
+    preprocess_css10_de(args)
   elif args.dataset == 'ljspeech':
     preprocess_ljspeech(args)
   elif args.dataset == 'kusal':

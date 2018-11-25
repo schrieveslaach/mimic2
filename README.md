@@ -63,6 +63,7 @@ Contributions are accepted! We'd love the communities help in building a better 
     * [LJ Speech](https://keithito.com/LJ-Speech-Dataset/) (Public Domain)
     * [Blizzard 2012](http://www.cstr.ed.ac.uk/projects/blizzard/2012/phase_one) (Creative Commons Attribution Share-Alike)
     * [M-ailabs](http://www.m-ailabs.bayern/en/the-mailabs-speech-dataset/)
+    * [CSS10: A Collection of Single Speaker Speech Datasets for 10 Languages](https://github.com/Kyubyong/css10)
 
    You can use other datasets if you convert them to the right format. See [TRAINING_DATA.md](TRAINING_DATA.md) for more info.
 
@@ -90,7 +91,17 @@ Contributions are accepted! We'd love the communities help in building a better 
              |- lab
              |- wav
    ```
-   
+
+   alternatively, like this for CSS10, German dataset (make sure to adjust `text/symbols.py` in order to meet the character set):
+   ```
+   tacotron
+     |- css10
+         |- achtgesichterambiwasse
+         |- meisterfloh
+         |- serapionsbruederauswahl
+         |- transcript.txt
+   ```
+
    For M-AILABS follow the directory structure from [here](http://www.m-ailabs.bayern/en/the-mailabs-speech-dataset/)
 
 3. **Preprocess the data**
